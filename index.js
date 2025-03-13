@@ -112,6 +112,7 @@ function removeUser(userId) {
 }
 
 function updateUI() {
+  console.log(users)
   const availableUsers = users.filter(
     (user) => user.state && user.state.onlineStatus == "available"
   );
@@ -120,8 +121,8 @@ function updateUI() {
   );
 
   const userCount = users.length;
-  const availableUserCount = availableUsers ? availableUsers.length : 0;
   const busyUserCount = busyUsers ? busyUsers.length : 0;
+  const availableUserCount = userCount - busyUserCount;
 
   document.getElementById("totalUsers").innerHTML = userCount;
   document.getElementById("availableUsers").innerHTML = availableUserCount;
