@@ -22,8 +22,13 @@
 
 /**  Override default styles for this demo only **/
 
-@media screen and (max-width: 500px) {
-    /* Table full width on mobile devices */
+article table tbody tr td.table_td_first {
+    width:500px;
+    max-width: 500px;
+}
+
+@media screen and (max-width: 800px) {
+    /* Table full width on windows less than  */
     article table tbody tr td.table_td_first {
         width:100%;
     }
