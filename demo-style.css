@@ -1,0 +1,53 @@
+/**  Common styles for all demos */
+
+.demo-wrapper {
+    display:flex;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0.4rem;
+    user-select: none !important;
+}
+
+.demo-column {
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+    width:100%;
+}
+
+.demo-row {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width:100%;
+}
+
+.demo-container {
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    width:100%;
+}
+
+/* On mobile, default to column view */ 
+@media screen and (max-width: 500px) {
+    .demo-container {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width:100%;
+    }
+  }
+
+/* Override default styles for demos */ 
+.markdown>h2 {
+    margin-top: 0 !important;
+}
+
+.pn-content__left {
+    width:100% !important;
+}

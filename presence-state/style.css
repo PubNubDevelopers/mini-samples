@@ -1,80 +1,37 @@
-body {
-    user-select: none;
-    font-family: Arial, Helvetica, sans-serif;
+/**  Custom Styles for this demo **/
+
+.cta {
+    align-self: flex-end;
 }
 
-a {
-    text-decoration: none;
+.stateBtn {
+  cursor: pointer !important;
+  justify-items: center !important;
+  min-width: 250px;
+  max-width: 250px;
 }
 
-h1 {
-    font-size: larger;
+#btnHeading {
+    text-align: center;
 }
 
-h2 {
-    font-size: large;
+#btnDescription {
+    text-align: center;
 }
 
-.setYourState {
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    gap:20px;
+
+/**  Override default styles for this demo only **/
+
+@media screen and (max-width: 500px) {
+    /* Table full width on mobile devices */
+    article table tbody tr td.table_td_first {
+        width:100%;
+    }
 }
 
-.statePicker {
-    cursor: pointer;
-    display:flex;
-    flex-direction: row;
-    height: fit-content;
-    gap: 5px;
-    border: solid;
-    border-radius: 10px;
-    padding: 10px;
-    border-color: gray;
-}
-
-.statePicker:hover {
-    background-color: aliceblue;
-}
-
-.statePickerIcon {
-    border-radius: 25px;
-}
-
-.redBackground {
-    background-color: red;
-}
-
-.yellowBackground {
-    background-color: yellow;
-}
-
-.userCountBox {
-    display:flex;
-    flex-direction: column;
+article table tbody tr td.table_td_default {
+    padding-right:20px;
+    text-align: end;
+    white-space: nowrap;
     width: fit-content;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    gap:10px;
-}
-
-.userCount {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap:5px;
-    background-color: aliceblue;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.userNumber {
-    padding-left: 15px;
-    font-size: x-large;
-}
-
-.smallText {
-    font-size: smaller;
 }

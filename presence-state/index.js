@@ -1,6 +1,7 @@
 var pubnub = null;
 const users = [];
 const CHANNEL_NAME = "lobby.general";
+var currentStatus = "available"
 
 //  PubNub keyset info for this demo.  
 // This keyset is protected and restricted but you can obtain your own keyset for free at https://admin.pubnub.com/register :) 
@@ -21,7 +22,7 @@ async function init() {
   });
 
   lobbySubscription.onPresence = (presenceEvent) => {
-    console.log(presenceEvent);
+    //console.log(presenceEvent);
     switch (presenceEvent.action) {
       case "join":
       case "state-change":
@@ -55,7 +56,7 @@ async function init() {
 
   pubnub.addListener({
     status: (status) => {
-      console.log(status);
+      //console.log(status);
     },
   });
 
@@ -64,7 +65,7 @@ async function init() {
   await pubnub.setState({
     channels: [CHANNEL_NAME],
     state: {
-      onlineStatus: "available",
+      onlineStatus: currentStatus,
     },
   });
 
@@ -106,7 +107,6 @@ function removeUser(userId) {
 }
 
 function updateUI() {
-  console.log(users)
   const availableUsers = users.filter(
     (user) => user.state && user.state.onlineStatus == "available"
   );
@@ -123,28 +123,34 @@ function updateUI() {
   document.getElementById("busyUsers").innerHTML = busyUserCount;
 }
 
-function setMyState(newState)
+function toggleState()
 {
-    pubnub.setState({
-        channels: [CHANNEL_NAME],
-        state: {
-          onlineStatus: newState,
-        },
-    })
+  const buttonHeading = document.getElementById('btnHeading')
+  const buttonDescription = document.getElementById('btnDescription')
+  const labelAvailableUsers = document.getElementById('lblAvailableUsers')
+  const labelBusyUsers = document.getElementById('lblBusyUsers')
+  if (currentStatus == "available")
+  {
+    buttonHeading.innerHTML = "Set Myself Available"
+    buttonDescription.innerHTML = "Your State is Currently Busy"
+    labelAvailableUsers.innerHTML = "<strong>Available users:</strong>"
+    labelBusyUsers.innerHTML = "<strong>Busy users:</strong> (including you)"
+    currentStatus = "busy"
+  }
+  else
+  {
+    buttonHeading.innerHTML = "Set Myself Busy"
+    buttonDescription.innerHTML = "Your State is Currently Available"
+    labelAvailableUsers.innerHTML = "<strong>Available users:</strong> (including you)"
+    labelBusyUsers.innerHTML = "<strong>Busy users:</strong>"
+    currentStatus = "available"
+  }
 
-    const busyIcon = document.getElementById('busyIcon')
-    const availableIcon = document.getElementById('availableIcon')
-    console.log(newState)
-    if (newState == 'busy')
-    {
-        //  Illuminate the busy icon on UI
-        availableIcon.classList.remove('yellowBackground')
-        busyIcon.classList.add('redBackground')
-    }
-    else
-    {
-        availableIcon.classList.add('yellowBackground')
-        busyIcon.classList.remove('redBackground')
-    }
-
+  pubnub.setState({
+    channels: [CHANNEL_NAME],
+    state: {
+      onlineStatus: currentStatus,
+    },
+  })
 }
+
