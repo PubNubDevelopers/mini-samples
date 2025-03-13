@@ -134,8 +134,8 @@ function toggleState()
   {
     buttonHeading.innerHTML = "Set Myself Available"
     buttonDescription.innerHTML = "Your State is Currently Busy"
-    labelAvailableUsers.innerHTML = "<strong>Available users:</strong>"
-    labelBusyUsers.innerHTML = "<strong>Busy users:</strong> (including you)"
+    labelAvailableUsers.innerHTML = "<strong>Available</strong> users:"
+    labelBusyUsers.innerHTML = "<strong>Busy</strong> users: (including you)"
     bellIcon.classList.remove('lg:grayscale')
     bellIcon.classList.add('grayscale-0')
     currentStatus = "busy"
@@ -144,8 +144,8 @@ function toggleState()
   {
     buttonHeading.innerHTML = "Set Myself Busy"
     buttonDescription.innerHTML = "Your State is Currently Available"
-    labelAvailableUsers.innerHTML = "<strong>Available users:</strong> (including you)"
-    labelBusyUsers.innerHTML = "<strong>Busy users:</strong>"
+    labelAvailableUsers.innerHTML = "<strong>Available</strong> users: (including you)"
+    labelBusyUsers.innerHTML = "<strong>Busy</strong> users:"
     bellIcon.classList.add('lg:grayscale')
     bellIcon.classList.remove('grayscale-0')
     currentStatus = "available"
