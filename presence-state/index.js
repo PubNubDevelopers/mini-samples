@@ -1,26 +1,20 @@
+var pubnub = null;
 const users = [];
 const CHANNEL_NAME = "lobby.general";
 
-const PUBNUB_CONFIG = {
-  //  todo protect this keyset
-  publishKey: "pub-c-2ba371e4-7ee2-478a-ade4-82aad3adb35a",
-  subscribeKey: "sub-c-fe695d36-1fb8-4f75-b394-0349d7b2ca26",
-  userId: makeid(20),
-};
-
-function makeid(length) {
-  var result = "";
-  var characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-}
-
-const pubnub = new PubNub(PUBNUB_CONFIG);
+//  PubNub keyset info for this demo.  
+// This keyset is protected and restricted but you can obtain your own keyset for free at https://admin.pubnub.com/register :) 
+const publishKey = "pub-c-2ba371e4-7ee2-478a-ade4-82aad3adb35a";
+const subscribeKey = "sub-c-fe695d36-1fb8-4f75-b394-0349d7b2ca26";
+const TOKEN_SERVER =
+"https://devrel-demos-access-manager.netlify.app/.netlify/functions/api/mini-sample-presence-state";
+//const TOKEN_SERVER =
+//"http://localhost:8009/.netlify/functions/api/mini-sample-presence-state";
 
 async function init() {
+  const myUserId = makeId(20)
+  pubnub = await initPubNub(publishKey, subscribeKey, myUserId, TOKEN_SERVER)
+
   const lobbyChannel = pubnub.channel(CHANNEL_NAME);
   const lobbySubscription = lobbyChannel.subscription({
     receivePresenceEvents: true,
